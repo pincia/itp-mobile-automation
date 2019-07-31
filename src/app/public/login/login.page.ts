@@ -2,10 +2,12 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './../../services/authentication.service'
 import { Device } from '@ionic-native/device/ngx';
-
+import { Storage } from '@ionic/storage';
 import { Events, AlertController, Platform, ToastController, NavController } from '@ionic/angular';
 import { BarcodeService } from 'src/app/barcode.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -14,111 +16,135 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-
+  private showPasswordText;
   private loginForm: FormGroup;
   private code: string;
+  public impianti:any;
   public displaySpinner:string;
+  public codice_impianto:string;
   public constructor(public events:Events,public router:Router, private authService: AuthenticationService, private formBuilder: FormBuilder, public navCtrl: NavController, private barcodeProvider: BarcodeService,
     private changeDetectorRef: ChangeDetectorRef, private device: Device,
+    public onesignal:OneSignal,
+    public storage:Storage,
     private alertController: AlertController, private platform: Platform, private toastController: ToastController) {
     this.code = "";
+   
+    this.impianti=environment.impianti;
+    this.showPasswordText=false;
     this.displaySpinner="none";
     this.loginForm = this.formBuilder.group({
       id: ['', Validators.required],
       password: [''],
+      codice_impianto:['']
     });
-    this.platform.ready().then((readySource) => {
-      this.barcodeProvider.sendCommand("com.symbol.datawedge.api.CREATE_PROFILE", "Italprogetti");
-
-      let profileConfig = {
-        "PROFILE_NAME": "Italprogetti",
-        "PROFILE_ENABLED": "true",
-        "CONFIG_MODE": "UPDATE",
-        "PLUGIN_CONFIG": {
-          "PLUGIN_NAME": "BARCODE",
-          "RESET_CONFIG": "true",
-          "PARAM_LIST": {}
-        },
-        "APP_LIST": [{
-          "PACKAGE_NAME": "it.italprogetti.zebraapp",
-          "ACTIVITY_LIST": ["*"]
-        }]
-      };
-      console.log("PROFILE CONFIG 1");
-      this.barcodeProvider.sendCommand("com.symbol.datawedge.api.SET_CONFIG", profileConfig);
-
-      //  Configure the created profile (intent plugin)
-      let profileConfig2 = {
-        "PROFILE_NAME": "Italprogetti",
-        "PROFILE_ENABLED": "true",
-        "CONFIG_MODE": "UPDATE",
-        "PLUGIN_CONFIG": {
-          "PLUGIN_NAME": "INTENT",
-          "RESET_CONFIG": "true",
-          "PARAM_LIST": {
-            "intent_output_enabled": "true",
-            "intent_action": "it.italprogetti.zebraapp.ACTION",
-            "intent_delivery": "2"
-          }
-        }
-      };
-      console.log("PROFILE CONFIG 2");
-      this.barcodeProvider.sendCommand("com.symbol.datawedge.api.SET_CONFIG", profileConfig2);
-
-     
-    });
+    
 
   }
   ionViewWillEnter(){
-   //  A scan has been received
-   this.events.subscribe('data:scan', (scanData, time) => {
-    //  Update the list of scanned barcodes
-    let scannedData = scanData.extras["com.symbol.datawedge.data_string"];
-    let scannedType = scanData.extras["com.symbol.datawedge.label_type"];
-    this.logincode(scannedData);
-    this.changeDetectorRef.detectChanges();
-  });
+    console.log(this.codice_impianto)
+    this.storage.get("codice_impianto").then(val=>{
+      this.codice_impianto=val; 
+      console.log(this.codice_impianto)
+    });
 
   }
   ionViewWillLeave(){
-    this.events.unsubscribe('data:scan');
+
     this.displaySpinner="none";
+  
   }
-  //  Function to handle the floating action button onDown.  Start a soft scan.
-  public fabDown() {
-    console.log("ZEBRA FABDOWN");
-    //this.logincode('ItalProgetti');
-    this.barcodeProvider.sendCommand("com.symbol.datawedge.api.SOFT_SCAN_TRIGGER", "START_SCANNING");
-  }
-
-  //  Function to handle the floating action button onUp.  Cancel any soft scan in progress.
-  public fabUp() {
-    console.log("ZEBRA FABDOWN");
-    this.barcodeProvider.sendCommand("com.symbol.datawedge.api.SOFT_SCAN_TRIGGER", "STOP_SCANNING");
-  }
-
+ 
+  
 
   ngOnInit() {
     this.events.subscribe('login: done', (res) => {
       this.displaySpinner="none";
     });
+    console.log("ngOnInit")
   }
   user = {}
 
   login() {
     console.log(this.user);
     this.displaySpinner="block";
-    this.authService.login(this.user['id'], this.user['password']);
-    this.loginForm.reset();
+
+  this.authService.login(this.user['id'], this.user['password'], this.codice_impianto).subscribe(
+    res => {
+     
+      this.displaySpinner="none";
+      this.loginForm.reset();
+    },          
+    err => {
+      this.presentToast("LOGIN E PASSWORD ERRATI")
+      this.displaySpinner="none";
+    },     
+    () => {console.log('all done!');
   }
+  );
+    
+  }
+
+
+
+  
   logincode(code: string) {
     this.displaySpinner="block";
-    this.authService.loginWithCode(code);
-  
-  }
+    let param = code.split("_")
+    this.authService.login(param[0],param[1],param[2]).subscribe(
+      res => {
+       
+        this.displaySpinner="none";
+      },          
+      err => {
+      
+        this.displaySpinner="none";
+      },     
+      () => {console.log('all done!');
+    }
+    );
+      this.loginForm.reset();
+    }
 
   scanLogin() {
   }
   
 
+  onChange(value){
+    this.codice_impianto=value;
+    try{
+    window["plugins"].OneSignal.deleteTag("codice");
+    window["plugins"].OneSignal.sendTag("codice",value);
+    }
+    catch(error){
+console.log("NO ONESIGNAL")
+    }
+    this.storage.set("codice_impianto",value)
+    this.impianti.forEach(impianto=>{
+      if(impianto.codice_impianto==this.codice_impianto){
+        this.storage.set("api_host",impianto.api_host);
+        this.storage.set("socket_host",impianto.socket_host);
+        this.storage.set("codice_registrazione",impianto.codice_registrazione);
+        this.authService.host=impianto.api_host;
+        }
+    })
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+
+  reset(){
+    
+  }
+}
+
+
+interface Propriety {
+  name: string;
+  value: boolean;
 }

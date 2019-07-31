@@ -15,11 +15,72 @@ export class MenuPage implements OnInit {
   pages = [
     {
       title: 'Home',
-      url: '/menu/dashboard'
+      url: '/members/dashboard',
+      icon: 'home'
+    },
+    {
+      title: 'Bottali',
+      url: '/drums',
+      image: 'assets/images/drum_icon.svg'
+    }
+    ,
+    {
+      title: 'Prodotti',
+      image: 'assets/images/flasks_white.svg',
+      children: [
+        {
+          title: 'Depositi',
+          url: '/storage',
+          image: 'assets/images/tanks_icon.svg',
+        },
+        {
+          title: 'Prodotti in polvere',
+          url: '/polveri',
+          icon: 'list'
+        }
+      ]
+      },
+    {
+      title: 'ODP',
+      image: 'assets/images/recipe_icon.svg',
+      children: [
+        {
+          title: 'Calendario ODP',
+          url: '/calendar',
+          icon: 'calendar'
+        },
+        {
+          title: 'In esecuzione',
+          url: '/odplist/1',
+          fontawesome:'list'
+        },
+        {
+          title: 'In coda',
+          url: '/odplist/0',
+          fontawesome:'list'
+        },
+        {
+          title: 'Archivio',
+          url: '/odplist/2',
+          fontawesome:'list'
+        }
+
+      ]
+    },
+    {
+      title: 'Allarmi',
+      url: '/alarms',
+      fontawesome: 'exclamation-triangle'
     },
     {
       title: 'Profilo',
-      url: '/menu/profile'
+      url: '/menu/profile',
+      icon: 'person'
+    },
+    {
+      title: 'Impostazioni',
+      url: '/settings',
+      fontawesome: 'cog'
     }
  
   ];

@@ -51,5 +51,7 @@ getData(){
   buttonClick(alarms,index){
     console.log("PIPPO ALARM!");
   }
-
+  trackByAlarm(index,alarm) { 
+    return alarm['id_auto']; 
+  }
 }

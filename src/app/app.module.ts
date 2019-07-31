@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+
+import { FormsModule,ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { DeviceFeedback } from '@ionic-native/device-feedback/ngx';
@@ -27,7 +28,17 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { HomeMenuPopoverPagePage } from './popover/home-menu-popover-page/home-menu-popover-page.page';
-import { HomePopoverPage } from './members/dashboard/dashboard.page';
+import { Http ,Response ,Headers, RequestOptions} from '@angular/http';
+import { HttpModule } from '@angular/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { ChartsModule } from 'ng2-charts';
+
+
+library.add(fas, far, fab);
 
 const echoConfig: SocketIoEchoConfig = {
   userModel            : 'App\\User',
@@ -36,18 +47,27 @@ const echoConfig: SocketIoEchoConfig = {
   options              : {
       host       : environment.socketEndpoint,
       broadcaster: 'socket.io',
+      transports: ['websocket', 'polling', 'flashsocket'],
   },
 };
 
 @NgModule({
-  declarations: [AppComponent,HomeMenuPopoverPagePage ],
+  declarations: [AppComponent,HomeMenuPopoverPagePage],
   entryComponents: [HomeMenuPopoverPagePage],
   imports: [
     AngularLaravelEchoModule.forRoot(echoConfig),
-    BrowserModule,IonicStorageModule.forRoot(), 
+    BrowserModule,
+    FontAwesomeModule,
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+      driverOrder: ['sqlite','localstorage' ]
+    }),
     IonicModule.forRoot(),HttpClientModule, 
     AppRoutingModule, CommonModule,
-    FormsModule],
+    HttpModule,
+    FormsModule,
+    ChartsModule,
+    ReactiveFormsModule],
   providers: [
     StatusBar,
     DataService,
@@ -56,11 +76,13 @@ const echoConfig: SocketIoEchoConfig = {
     File,
     FileOpener,
     TextToSpeech,
+    FormBuilder,
     DeviceFeedback,
     WebView,
     FilePath,
     NativeAudio,
     NativePageTransitions,
+  
     SpeechRecognition,
     PushService,
     OneSignal,
@@ -72,9 +94,9 @@ const echoConfig: SocketIoEchoConfig = {
 export class AppModule {
 
   constructor(private authService: AuthenticationService){
- console.log(ECHO_CONFIG);
-
+    console.log(echoConfig);
   }
+  
   
 
 }

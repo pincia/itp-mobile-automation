@@ -4,13 +4,13 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    
+    <!--
         <ion-button color="warning" slot="end" [routerLink]="'/carico'">
             CARICO
             <ion-icon slot="end" name="add"></ion-icon>
           </ion-button>
-         <!--[routerLink]="'/members/tank'" [queryParams]="{ id: 2 }"  --> 
 
+          -->
   </ion-toolbar>
 </ion-header>
 
@@ -23,7 +23,7 @@
         <ion-row no-padding>
           <ion-col  *ngFor="let tank of tanksdata; let i= index; trackBy: trackByTank;" (click)="goToTank($event,tank)" no-padding size="6">
             <ion-card style="background: white;">
-              <ion-card-header no-padding class="ion-text-center drum-header">TANK {{tank.NOME}}</ion-card-header>
+              <ion-card-header no-padding class="ion-text-center drum-header">TANK {{tank.SIGLA}}  <BR> {{tank.PRODOTTO.substring(0,15)}}</ion-card-header>
               <div class="item-content" style="width: 100%;padding: 0!important;text-align: center">
 
                   <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg"
@@ -37,9 +37,9 @@
                     </linearGradient>
                     <linearGradient [attr.id]="'Gradient_'+ i" x1="0" x2="0" y1="0" y2="1">
                       <stop id="off1" offset="0%" stop-color="black" stop-opacity="0"></stop>
-                        <text transform="matrix(1 0 0 1 96.02 185)" font-family="monospace" font-size="21">{{tank.PERCENTAGE}}%</text>
-                      <stop [attr.offset]="(100-(tank.PERCENTAGE+5)) +'%'" stop-color="black" stop-opacity="0"></stop>
-                      <stop [attr.offset]="(100-tank.PERCENTAGE) +'%'"  [attr.stop-color]="getColor(tank.PERCENTAGE)"></stop>
+                        <text transform="matrix(1 0 0 50 96.02 185)" font-family="monospace" font-size="10">{{tank.PERCENTAGE}}%</text>
+                      <stop [attr.offset]="(100-(tank.LIV_PERC+5)) +'%'" stop-color="black" stop-opacity="0"></stop>
+                      <stop [attr.offset]="(100-tank.LIV_PERC) +'%'"  [attr.stop-color]="getColor(tank)"></stop>
                     </linearGradient>
                   </defs>
   
@@ -139,9 +139,14 @@
                   <path [ngClass]="tank.FILLING==1?'working':''" fill="#D1D3D4" stroke="#000000" stroke-width="0.7087"
                     stroke-miterlimit="10" d="M65.816,97.81h3.889V72.849
     c-1.296-0.01-2.592-0.021-3.889-0.032V97.81z" />
-  <rect x="75.56" y="160.5" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="72.471" height="35.72"/>
-  <text transform="matrix(1 0 0 1 96.02 185)" font-family="monospace" font-size="21">{{tank.PERCENTAGE}}%</text>
-  
+ 
+    <rect x="64" y="132.987" fill="#FFFFFF" stroke="#000000" stroke-width="2" stroke-miterlimit="10" width="91.936" height="31"/>
+    <text transform="matrix(1.0102 0 0 1 80 158)" font-family="'MyriadPro-Regular'" font-size="25.5294">{{tank.LIV_PERC}}%</text>
+    <rect [ngClass] = "tank.TEMP_VIEW==1?'':'hide'" x="55" y="169" fill="#C6C6B9" stroke="#040506" width="113.794" height="50.809"/>
+    <text  [ngClass] = "tank.TEMP_VIEW==1?'':'hide'" transform="matrix(0.8233 0 0 1 68 195)" fill="#010202" font-family="'MyriadPro-Bold'" font-size="25.2443">°C</text>
+    <text  [ngClass] = "tank.TEMP_VIEW==1?'':'hide'" transform="matrix(0.956 0 0 1 122 195)" fill="#3AAA35" font-family="'MyriadPro-Bold'" font-size="20.92">{{tank.TEMP}}</text>
+    <text  [ngClass] = "tank.TEMP_VIEW==1?'':'hide'"  transform="matrix(1 0 0 1 68 213)" font-family="'MyriadPro-Regular'" font-size="14">SET   </text>
+    <text  [ngClass] = "tank.TEMP_VIEW==1?'':'hide'" transform="matrix(0.8837 0 0 1 132 213)"font-family="'MyriadPro-Regular'" font-size="14">{{tank.SET_TEMP}}</text>
                 </svg>
   
               </div>

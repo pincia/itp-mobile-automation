@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
-import { NavParams, PopoverController, NavController } from '@ionic/angular';
+import { NavParams, PopoverController, NavController, ModalController } from '@ionic/angular';
+import { ViewController } from '@ionic/core';
 
 @Component({
   selector: 'app-home-menu-popover-page',
@@ -15,9 +16,10 @@ export class HomeMenuPopoverPagePage implements OnInit {
     private popoverController: PopoverController,
     public navParams: NavParams,
     public navCtrl:NavController,
+    public viewCtrl: ModalController,
   ) { }
   logout() {
-    this.authService.logout();
+ 
     var action = "logout";
     this.popoverController.dismiss(action);
   }
@@ -25,12 +27,10 @@ export class HomeMenuPopoverPagePage implements OnInit {
 openSettings(){
   var action = "settings";
   this.popoverController.dismiss(action);
-  this.navCtrl.navigateForward('\settings');
 }
 openMyProfile(){
   var action = "profile";
   this.popoverController.dismiss(action);
-  this.navCtrl.navigateForward('\profile');
 }
   ngOnInit() {
   }

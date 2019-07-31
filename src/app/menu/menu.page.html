@@ -1,219 +1,57 @@
 
-    <ion-menu [ngStyle]="{'background-color': '#' + bgColor}">
-  <!--
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>-->
-      <ion-content class="side-menu">
-        <ion-list class="side-menu-list" (click)="openPage('Home')">
-          <button class="sidemenu-button" menuClose ion-item>
-            Dashboard
-          </button>
-        </ion-list>
-        <ion-list class="side-menu-list" (click)="openSub('empMenu')">
-          <button class="sidemenu-button" ion-item>
-            Employee
-            <ion-icon [name]="selectedPage == 'empMenu'? 'arrow-down' : 'arrow-forward'" float-right></ion-icon>
-          </button>
-        </ion-list>
-        <div *ngIf="selectedPage == 'empMenu'" class="subMenu">
-          <ion-list class="side-menu-list" (click)="openPage('employeeList')">
-            <button class="sidemenu-button" menuClose ion-item>
-              All Employees
-            </button>
-          </ion-list>
-          <ion-list class="side-menu-list" (click)="openPage('holidays')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Holidays
-            </button>
-          </ion-list>
-          <ion-list  class="side-menu-list" (click)="openPage('attendance')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Attendance
-            </button>
-          </ion-list>
-          <ion-list  class="side-menu-list" (click)="openPage('attendancelist')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Attendance List
-            </button>
-          </ion-list>
-          <ion-list class="side-menu-list" (click)="openPage('attendancedetail')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Attendance Details
-            </button>
-          </ion-list>
-          <ion-list class="side-menu-list" (click)="openPage('leave')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Leave Requests
-            </button>
-          </ion-list>
-          <ion-list  class="side-menu-list">
-            <button class="sidemenu-button" menuClose ion-item (click)="openPage('department')">
-              Departments
-            </button>
-          </ion-list>
-          <ion-list  class="side-menu-list">
-            <button class="sidemenu-button" (click)="openPage('designations')" menuClose ion-item>
-              Designations
-            </button>
-          </ion-list>
-        </div>
-        <ion-list class="side-menu-list" (click)="openPage('project')">
-          <button class="sidemenu-button" menuClose ion-item>
-            Projects
-          </button>
-        </ion-list>
-        <ion-list class="side-menu-list" (click)="openPage('task')">
-          <button class="sidemenu-button" menuClose ion-item>
-            Tasks
-          </button>
-        </ion-list>
-        <ion-list class="side-menu-list" (click)="openPage('calendar')">
-          <button class="sidemenu-button" menuClose ion-item>
-            Calendar
-          </button>
-        </ion-list>
-        <ion-list class="side-menu-list" (click)="openPage('event')">
-            <button class="sidemenu-button" menuClose ion-item>
-             Events
-            </button>
-          </ion-list>
-        <ion-list class="side-menu-list" (click)="openPage('client')">
-          <button class="sidemenu-button" menuClose ion-item>
-            Clients
-          </button>
-        </ion-list>
-        <ion-list class="side-menu-list" (click)="openPage('email')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Email
-            </button>
-          </ion-list>
+    <ion-menu>
     
-        <ion-list class="side-menu-list" (click)="openPage('chatlist')">
-          <button class="sidemenu-button" menuClose ion-item>
-            Chat
-          </button>
-        </ion-list>
-        <ion-list class="side-menu-list" (click)="openSub('callMenu')">
-          <button class="sidemenu-button" ion-item>
-            Calls
-            <ion-icon [name]="selectedPage == 'callMenu'? 'arrow-down' : 'arrow-forward'" float-right></ion-icon>
-          </button>
-        </ion-list>
-        <div *ngIf="selectedPage == 'callMenu'" class="subMenu">
-          <ion-list class="side-menu-list" (click)="openPage('voicecall')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Voice Call
-            </button>
-          </ion-list>
-          <ion-list class="side-menu-list" (click)="openPage('videocall')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Video Call
-            </button>
-          </ion-list>
-          <ion-list class="side-menu-list" (click)="openPage('incomingcall')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Incoming Call Page
-            </button>
-          </ion-list>
-        </div>
-        <div >
-          <ion-list class="side-menu-list" (click)="openSub('accountsMenu')">
-            <button class="sidemenu-button" ion-item>
-              Accounts
-              <ion-icon [name]="selectedPage == 'accountsMenu'? 'arrow-down' : 'arrow-forward'" float-right></ion-icon>
-            </button>
-          </ion-list>
-          <div *ngIf="selectedPage == 'accountsMenu'" class="subMenu">
-            <ion-list class="side-menu-list" (click)="openPage('estimateslist')">
-              <button class="sidemenu-button" menuClose ion-item>
-                Estimates
-              </button>
-            </ion-list>
-            <ion-list class="side-menu-list" (click)="openPage('invoicelist')">
-                <button class="sidemenu-button" menuClose ion-item>
-                  Invoices
-                </button>
-              </ion-list>
-            <ion-list class="side-menu-list" (click)="openPage('paymentlist')">
-              <button class="sidemenu-button" menuClose ion-item>
-                Payments
-              </button>
-            </ion-list>
-            <ion-list class="side-menu-list" (click)="openPage('expenseslist')">
-                <button class="sidemenu-button" menuClose ion-item>
-                  Expenses
-                </button>
-              </ion-list>
-          </div>
-        </div>
-        <ion-list class="side-menu-list" (click)="openSub('payMenu')">
-          <button class="sidemenu-button" ion-item>
-            Payroll
-            <ion-icon [name]="selectedPage == 'payMenu'? 'arrow-down' : 'arrow-forward'" float-right></ion-icon>
-          </button>
-        </ion-list>
-        <div *ngIf="selectedPage == 'payMenu'" class="subMenu">
-          <ion-list class="side-menu-list" (click)="openPage('empSalary')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Employee Salary
-            </button>
-          </ion-list>
-          
-          <ion-list class="side-menu-list" (click)="openPage('payslip')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Payslip
-            </button>
-          </ion-list>
-        </div>
-        <ion-list class="side-menu-list" (click)="openPage('attendance')">
-          <button class="sidemenu-button" menuClose ion-item>
-            Attendance
-          </button>
-        </ion-list>
-        <ion-list class="side-menu-list" (click)="openPage('setting')">
-          <button class="sidemenu-button" menuClose ion-item>
-            Settings
-          </button>
-        </ion-list>
-        <ion-list  class="side-menu-list" (click)="openPage('timesheet')">
-          <button class="sidemenu-button" menuClose ion-item>
-            TimeSheets
-          </button>
-        </ion-list>
-        <ion-list  class="side-menu-list" (click)="openSub('loginMenu')">
-          <button class="sidemenu-button" ion-item>
-            Pages
-            <ion-icon [name]="selectedPage == 'loginMenu'? 'arrow-down' : 'arrow-forward'" float-right></ion-icon>
-          </button>
-        </ion-list>
-        <div *ngIf="selectedPage == 'loginMenu'" class="subMenu">
-          <ion-list  class="side-menu-list" (click)="openPage('login')">
-            <button class="sidemenu-button" menuClose ion-item>
-             Login
-            </button>
-          </ion-list>
-          <ion-list class="side-menu-list" (click)="openPage('register')">
-              <button class="sidemenu-button" menuClose ion-item>
-              Register
-              </button>
-            </ion-list>
-          <ion-list class="side-menu-list" (click)="openPage('forgot')">
-            <button class="sidemenu-button" menuClose ion-item>
-              Forgot Password
-            </button>
-          </ion-list>
-          <ion-list class="side-menu-list" (click)="openPage('profile')">
-              <button class="sidemenu-button" menuClose ion-item>
-              Profile
-              </button>
-            </ion-list>
-        </div>
-  
-      </ion-content>
-  
-    </ion-menu>
-  
-    <ion-router-outlet id="content" main></ion-router-outlet>
+          <ion-header >
+            <ion-toolbar style="--background:var(--ion-color-primary);color: white;" >
+              <ion-title>Menu</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="side-menu"  >
+              <div   style="--background:transparent; " *ngFor="let p of pages">
+
+                  <!-- Standard Menu Item -->
+                  <ion-menu-toggle *ngIf="p.url">
+                    <ion-item style="--background:transparent;color: white;" [routerLink]="p.url" routerDirection="forward" routerLinkActive="active">
+                      <img *ngIf="p.image" [src]="p.image" slot="start" style="color: white; width: 24px;">
+                      <ion-icon *ngIf="p.icon" [name]="p.icon" slot="start" style="color: white"></ion-icon>
+                      <fa-icon *ngIf="p.fontawesome" [icon]="['fas', p.fontawesome]" slot="start" style="color: white;  margin-left: 3px;"></fa-icon>
+                      <ion-label>
+                        {{ p.title }}
+                      </ion-label>
+                    </ion-item>
+                  </ion-menu-toggle>
+                  <!-- Item with Children -->
+             
+                  <ion-item  style="--background:transparent;color: white;" button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.parent-active]="p.open" detail="false">
+                    <img *ngIf="p.image" [src]="p.image" slot="start" style="color: white; width: 24px;">
+                    <ion-icon *ngIf="p.icon" [name]="p.icon" slot="start" style="color: white"></ion-icon>
+                    <fa-icon *ngIf="p.fontawesome" [icon]="['fas', p.fontawesome]" slot="start" style="color: white;  margin-left: 3px;"></fa-icon>
+                      
+                    <ion-icon style="color: white" slot="end" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+                    <ion-icon style="color: white" s slot="end" name="arrow-down" *ngIf="p.open"></ion-icon>
+                    <ion-label>{{ p.title }}</ion-label>
+                  </ion-item>
+             
+                  <!-- Children List for clicked Item -->
+                  <ion-list style="background:transparent;" *ngIf="p.open">
+                    <ion-menu-toggle   >
+                      <ion-item  style="--background:transparent;color: white;padding-left: 20px;" *ngFor="let sub of p.children" class="sub-item" [routerLink]="sub.url" routerDirection="forward"
+                        routerLinkActive="active">
+                        <ion-icon *ngIf="sub.icon"  [name]="sub.icon" slot="start" style="color: white"></ion-icon>
+                        <fa-icon  *ngIf="sub.fontawesome" [icon]="['fas', sub.fontawesome]" slot="start" style="color: white; margin-left: 3px;"></fa-icon>
+                        <img *ngIf="sub.image" [src]="sub.image" slot="start" style="color: white; width: 24px;">
+                        <ion-label>
+                          {{ sub.title }}
+                        </ion-label>
+                      </ion-item>
+                    </ion-menu-toggle>
+                  </ion-list>
+             
+                </div>
+      
+          </ion-content>
+      
+        </ion-menu>
+      
+        <ion-router-outlet id="content" main></ion-router-outlet>
+    

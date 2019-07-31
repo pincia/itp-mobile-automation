@@ -1,3 +1,35 @@
 .highlighted{
-    background: yellow;
+    background: rgb(255, 255, 106);
 }
+.done{
+    background: rgb(188, 247, 188);
+}
+ion-toolbar{
+    ion-title{
+        background: var(--ion-color-primary);
+    }
+   
+    color: white;
+}
+
+#progressbar {
+    background-color: black;
+    display: flex;
+    border-radius: 13px;
+    color:white;
+    /* (height of inner div) / 2 + padding */
+    padding: 3px;
+    width:100%;
+  }
+  
+  #progressbar>div {
+    background-color: orange;
+   
+    /* Adjust with JavaScript */
+    height: 20px;
+    border-radius: 10px;
+  }
+ion-spinner {
+
+    color:rgb(49, 128, 219);
+    }

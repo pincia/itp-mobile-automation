@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Router } from '@angular/router';
 import { Navigation } from 'selenium-webdriver';
 import { AutoLogoutComponent } from '../../components/auto-logout/auto-logout.component';
-import { ModalController, NavController, PopoverController, NavParams } from '@ionic/angular';
+import { ModalController, NavController, PopoverController, NavParams, AlertController } from '@ionic/angular';
 import { DeviceFeedback } from '@ionic-native/device-feedback/ngx';
 import { DataService } from 'src/app/services/data.service';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
@@ -14,13 +14,21 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 import { ViewController } from '@ionic/core';
 import { HomeMenuPopoverPagePageModule } from 'src/app/popover/home-menu-popover-page/home-menu-popover-page.module';
 import { HomeMenuPopoverPagePage } from 'src/app/popover/home-menu-popover-page/home-menu-popover-page.page';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
+  host: {
+    '(document:keydown)': 'handleKeyboardEvents($event)'
+},
 })
+@HostListener('document:keypress', ["$s"])
+
 export class DashboardPage implements OnInit{
+  ready=false;
   cssClass: string;
   primaryColor='#44bbec';
   secondryColor = '#0163fc';
@@ -45,23 +53,19 @@ export class DashboardPage implements OnInit{
      private tts: TextToSpeech,
      private nativePageTransitions: NativePageTransitions,
      public navCtrl: NavController,
+     public alertCtrl:AlertController,
       private speechRecognition: SpeechRecognition, 
       private dataService: DataService,
       private platform:Platform,
       private authService: AuthenticationService,
-      pusher: PushService,
+      pushservice: PushService,
       private modalController:ModalController,  
       router:Router) { 
+        this.navCtrl.navigateRoot('/members/dashboard');
     this.router=router;
- 
-    authService.storage.get('auth-token').then( res=>{ this.loginData= res.split(' ')
-    this.user = this.loginData[0];
-
-  
-  });
-
+     
   }
- 
+
   ngOnInit() {
     console.log("URL    "+this.router.url);
     this.speechRecognition.hasPermission()
@@ -76,11 +80,13 @@ export class DashboardPage implements OnInit{
         }
 
      });
-     
-
 
   }
-  
+
+  handleKeyboardEvents(e: KeyboardEvent){
+    console.log(e)
+    
+  }
   openPage(page: any) {
 
     this.nativePageTransitions.slide(this.options).then(()=>{
@@ -176,40 +182,47 @@ export class DashboardPage implements OnInit{
       event: ev,
       translucent: true
     });
+    popover.onDidDismiss().then(data => {
+      if (data.data == "profile") {
+        this.router.navigate(['profile'])
+      } else if (data.data == "settings") {
+        console.log("GO TO SETTINGS");
+        this.router.navigate(['settings']);
+       
+      } else if (data.data == "logout") {
+        this.confirmLogout();
+        
+        }
+      }
+    );
     return await popover.present();
   }
 
+  async confirmLogout(){
+    const alert = await this.alertCtrl.create({
+     // header: "ALLARMI",
+      //subHeader: event.desc,
+      message: "CONFERMI LOGOUT?",
+      buttons: [{
+        text:"CANCELLA",
+        cssClass:"alarm-alert-close-button",
+       
+      },
+      {
+        text:"CONFERMA",
+        cssClass:"alarm-alert-close-button",
+        handler: data => {
+          this.authService.logout();
+        }
+      }
 
-
-}
-
-
-export class HomePopoverPage {
-  public employee;
-  public roleId: any;
-  public role: any;
-
-  constructor(
-    public viewCtrl: ViewController,
-    public navParams: NavParams,
-    public navCtrl: NavController
-  ) {
-    this.role = localStorage.getItem("role");
-    this.roleId = localStorage.getItem("role_id");
+    
+    ],
+      cssClass:"logout-alert",
+    });
+    alert.present();
   }
 
-  openMyprofile() {
-    var action = "profile";
-  //  this.viewCtrl.dismiss(action);
-  }
 
-  openSettings() {
-    var action = "setting";
-    //this.viewCtrl.dismiss(action);
-  }
 
-  logout() {
-    var action = "logout";
-  // this.viewCtrl.dismiss(action);
-  }
 }

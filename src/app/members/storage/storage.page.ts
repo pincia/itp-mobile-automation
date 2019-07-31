@@ -51,6 +51,7 @@ export class StoragePage implements OnInit , OnDestroy {
    }
 getData(){
   this.tanksdata = this.pushservice.tanksdata;
+  
 }
   goToTank(event, tank) {
    console.log("GOTO TANKKKKKK"+tank);
@@ -62,16 +63,9 @@ getData(){
     console.log(this.router.url);
   }
 
-  getColor(perc){
-    if (perc<20){
-      return "red";
-    }
-    if (perc<80){
-      return "green";
-    }
-    else {
-      return "blue";
-  }
+  getColor(tank){
+    return "rgb("+tank.LIQUID_COLOR+")";
+  
 }
   async openModal(){
     console.log("Opne modal");

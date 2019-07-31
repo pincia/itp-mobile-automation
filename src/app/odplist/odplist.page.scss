@@ -1,0 +1,29 @@
+ion-spinner {
+
+   color:rgb(49, 128, 219);
+   }
+
+   :host ::ng-deep  .annullato{
+   background:rgba(255, 102, 102,1)!important;
+}
+:host ::ng-deep  .datatable-header {
+    background: rgb(77, 179, 111)!important;
+   font-size: 4px!important;
+
+   
+ }
+ :host ::ng-deep  .datatable-header-cell {
+   color:white!important;
+ }
+
+ :host ::ng-deep  .datatable-row-even {
+   background: rgba(240, 240, 240, 1);
+}
+
+:host ::ng-deep .datatable-row-odd {
+   background: rgba(255, 255, 255,1);
+}
+
+:host ::ng-deep  .datatable-body-cell{
+   font-size: 12px!important;
+}

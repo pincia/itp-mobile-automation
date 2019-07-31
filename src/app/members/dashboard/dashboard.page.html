@@ -1,82 +1,70 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-menu-button class= "menuIcon"></ion-menu-button >
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button class="menuIcon"></ion-menu-button>
+    </ion-buttons>
     <ion-title [ngStyle]="getHeaderStyle()">
       <!-- <img src="assets/imgs/new-hrms.png" class="whiteLogo"> -->
     </ion-title>
     <div *ngIf="roleId != '1'" class="notification-div">
-      <ion-icon ios="ios-more" md="md-more"  (click)="presentPopover($event)" class="notificationIcon"></ion-icon>
+      <ion-icon ios=""ios-more md="md-more" (click)="presentPopover($event)" class="notificationIcon"></ion-icon>
     </div>
   </ion-toolbar>
 </ion-header>
-<ion-content no-bounce class="background-content">
+<ion-content no-bounce class="background-content" >
   <div class="profile-card-div" [ngStyle]="getstyle()">
     <ion-card class="home-card" [ngStyle]="getstyle()">
       <div class="home-header">
         <img src="/assets/images/logo.svg" class="logo slide-in">
-        <p style="color:rgba(255, 255, 255, 0.904);font-size: 16px">Automation Integration</p>
+        <p style="color:rgba(255, 255, 255, 0.904);font-size: 16px;margin-top: 1vh;"><b style="font-size: 26px;">A</b>utomation <b
+            style="font-size: 26px;">I</b>ntegration</p>
       </div>
-    
     </ion-card>
   </div>
   <div class="home-data-card">
     <div class="dashboard-area">
       <ion-row class="dashboard-row">
         <ion-col col-6 class="dashboard-col" [ngClass]="cssClass">
-          <div class="dash-widget" #myElement>
+          <div class="dash-widget" [routerLink]="'/drums'" routerDirection="forward" (click)="feedback(0);" #myElement>
             <div class="dash-widget-icon">
-              <div  [routerLink]="'/drums'" routerDirection="forward" (click)="feedback(0);"  >
-                <ion-icon  src="/assets/images/drums.svg" class="home-icon"></ion-icon>
-              </div>
+              <ion-icon src="/assets/images/drums.svg" class="home-icon"></ion-icon>
             </div>
             <div class="dash-widget-info">
-             
-              <p class="dash-text">Drums</p>
+              <p class="dash-text">Bottali</p>
             </div>
           </div>
         </ion-col>
-        <ion-col col-6 [ngClass]="cssClass" class="dashboard-col" >
-          <div class="dash-widget">
+        <ion-col col-6 [ngClass]="cssClass" class="dashboard-col">
+          <div class="dash-widget" [routerLink]="'/storage'" routerDirection="forward">
             <div class="dash-widget-icon">
-              <div  [routerLink]="'/storage'" routerDirection="forward"  >
-                <ion-icon src="/assets/images/tanks.svg" class="home-icon"></ion-icon>
-              </div>
+              <ion-icon src="/assets/images/tanks.svg" class="home-icon"></ion-icon>
             </div>
             <div class="dash-widget-info">
-              
-              <p class="dash-text">Tanks</p>
+              <p class="dash-text">Depositi</p>
             </div>
           </div>
         </ion-col>
-     </ion-row>   
-     <ion-row class="dashboard-row">
-        <ion-col col-6 [ngClass]="cssClass" class="dashboard-col" >
-          <div class="dash-widget">
+      </ion-row>
+      <ion-row class="dashboard-row">
+        <ion-col col-6 [ngClass]="cssClass" class="dashboard-col">
+          <div class="dash-widget" [routerLink]="'/odplist/1'" routerDirection="forward">
             <div class="dash-widget-icon">
-              <div [routerLink]="'/members/recipe'" routerDirection="forward"  >
-                <ion-icon  src="/assets/images/products.svg" class="home-icon"></ion-icon>
-              </div>
+              <ion-icon src="/assets/images/products.svg" class="home-icon"></ion-icon>
             </div>
             <div class="dash-widget-info">
-             
-              <p class="dash-text">Recipe</p>
+              <p class="dash-text">ODP</p>
             </div>
           </div>
         </ion-col>
 
 
-        <ion-col *ngIf="roleId != '3'" col-6 [ngClass]="cssClass" class="dashboard-col" >
-          <div class="dash-widget">
+        <ion-col *ngIf="roleId != '3'" col-6 [ngClass]="cssClass" class="dashboard-col">
+          <div class="dash-widget" [routerLink]="'/alarms'" routerDirection="forward">
             <div class="dash-widget-icon">
-              <div  [routerLink]="'/alarms'" routerDirection="forward"  >
-                <ion-icon  src=" /assets/images/alarms.svg " class="home-icon"></ion-icon>
-              </div>
+              <ion-icon src=" /assets/images/alarms.svg " class="home-icon"></ion-icon>
             </div>
             <div class="dash-widget-info">
-             
-              <p class="dash-text">Alarms</p>
+              <p class="dash-text">Allarmi</p>
             </div>
           </div>
         </ion-col>
@@ -85,43 +73,3 @@
     </div>
   </div>
 </ion-content>
-<!--<ion-header>
-  <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="logout()">
-        <ion-icon slot="icon-only" name="log-out"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>HOME</ion-title>
-
-  </ion-toolbar>
-</ion-header>
-
-<ion-content justify-content-center>
-  <app-auto-logout></app-auto-logout>
-  <div  style="display: flex; justify-content: center;flex-wrap: wrap; height: 76%;margin: 35px 20px;">
-   
-    <div  [routerLink]="'/drums'" routerDirection="forward" (click)="feedback(0);" class="flex-div bottom-div "  >
-      <ion-icon  src="/assets/images/drum.svg" class="home-icon"></ion-icon>
-    </div>
-    <div  [routerLink]="'/storage'" routerDirection="forward"class="flex-div bottom-div left-div"  >
-      <ion-icon src="/assets/images/tank_icon.svg" class="home-icon"></ion-icon>
-    </div>
-    <div [routerLink]="'/members/recipe'" routerDirection="forward"  class="flex-div ">
-      <ion-icon  src="/assets/images/notepad.svg" class="home-icon"></ion-icon>
-    </div>
-    <div  [routerLink]="'/alarms'" routerDirection="forward"  class="flex-div left-div">
-      <ion-icon  src=" /assets/images/warning.svg " class="home-icon"></ion-icon>
-    </div>
-  </div>
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button color="success" (click)="feedback(0);talk();">
-        <ion-icon name="mic"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
- 
-</ion-content>   -->

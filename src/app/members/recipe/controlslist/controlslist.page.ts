@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ParamMap, Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-controlslist',
   templateUrl: './controlslist.page.html',
@@ -12,7 +12,8 @@ export class ControlslistPage implements OnInit {
   idAzioneGroup:any;
   public controlslist:any;
   displaySpinner:any;
-  host =  "76a4b2d1.ngrok.io";
+
+  host =  "5dd8db89.ngrok.io";
   constructor(public router:Router, private http:HttpClient, public route:ActivatedRoute) {
     this.displaySpinner = "block";
     this.route.paramMap
@@ -37,6 +38,7 @@ export class ControlslistPage implements OnInit {
   ngOnInit() {
   }
   goToControl(event, control) {
+    console.log(control);
   
    this.router.navigate(['/members/control',this.idOdpFasi, control['IDAZIONE'],control['numerico']]);
    }

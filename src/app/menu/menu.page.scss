@@ -1,4 +1,31 @@
-
+/*
 .active-item {
     border-left: 8px solid var(--ion-color-primary);
+    ion-icon{
+        color:black!important;
+    }
+    fa-icon{
+        color:black!important;
+    }
+    img{
+        color:black!important;
+    }
+}
+.parent-active {
+    border-left: 8px solid var(--ion-color-primary);
+    ion-icon{
+        color:black!important;
+    }
+    fa-icon{
+        color:black!important;
+    }
+    img{
+        color:black!important;
+    }
+}
+*/
+.side-menu{
+
+      --background:linear-gradient(var(--ion-color-primary),var(--ion-color-secondary));
+
 }

@@ -4,11 +4,52 @@
 
 export const environment = {
   production: false,
-  serverEndpoint: "http://9701fbf6.ngrok.io",
-  socketEndpoint: "http://192.168.77.240:6001",
-  socketAlarm: false,
+  serverEndpoint: "http://3.16.169.253/",
+  socketEndpoint: "http://3.16.169.253:6001",
+  VPNserverEndpoint:"http://10.201.233.240/",
+  VPNsocketEndpoint:"http://10.201.233.240:6001/",
+  socketAlarm: true,
   dataSocket: false,
-
+  impianti : [
+        {
+            "id": "1",
+            "nome":"italprogetti",
+            "codice_impianto": "qwerty",
+            "codice_registrazione":"abc",
+            "api_host": "10.201.233.239",
+            "socket_host":"10.201.233.240"
+        },
+        {
+          "id": "2",
+          "nome":"italprogetti ngrok",
+          "codice_impianto": "qwertyu",
+          "codice_registrazione":"def",
+          "api_host": "5dd8db89.ngrok.io",
+          "socket_host":"10.201.233.240"
+          
+      },
+      {
+        "id": "3",
+        "nome":"italprogetti test",
+        "codice_impianto": "test",
+        "codice_registrazione":"test",
+        "api_host": "5dd8db89.ngrok.io",
+        "socket_host":"10.201.233.240"
+        
+    },
+     {
+      "id": "4",
+      "nome":"WOLLSDORF",
+      "codice_impianto": "WOLLS19;",
+      "codice_registrazione":"Ww2019!",
+      "api_host": "225c4bde.ngrok.io",
+      "socket_host":"10.201.233.240"
+      
+  }
+  
+    
+    
+    ],
 };
 
 /*

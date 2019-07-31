@@ -7,24 +7,28 @@
       <ion-back-button></ion-back-button>
      </ion-buttons>
     <ion-buttons slot="end">
-       <ion-button  (click)="downloadPDF()">
-        <ion-icon slot="end" *ngIf="isLoaded" src="/assets/images/pdf.svg" style="font-size: 2.5em;">PDF</ion-icon>
-        </ion-button>
+      
+         <ion-icon  (click)="goToConsumo()" slot="end" *ngIf="isLoaded" src="/assets/images/trend_icon.svg" style="font-size: 2.2em;">CONSUMI</ion-icon>
+
+        
+        <ion-icon  (click)="downloadPDF()" slot="end" *ngIf="isLoaded" src="/assets/images/pdf.svg" style="font-size: 2.2em;">PDF</ion-icon>
+     
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row style="font-size: 12px;border-bottom: solid 2px;border-color:darkslateblue; ">
-      <ion-col size="2"><b>PASSO</b></ion-col>
+  <ion-grid *ngIf="drum">
+    <ion-row style="font-size: 10px;border-bottom: solid 2px;border-color:darkslateblue;font-weight:bold; ">
+      <ion-col size="1"><b>PASSO</b></ion-col>
       <ion-col size="3"><b>DESCRIZ.</b></ion-col>
       <ion-col size="2"><b>RPM</b></ion-col>
       <ion-col size="3"><b>PRODOTTO</b></ion-col>  
       <ion-col size="2"><b>WT C°</b></ion-col>
+      <ion-col size="1"><b>MIN</b></ion-col>
     </ion-row>
-    <ion-row [ngClass]="drum.PASSO==line.PASSO ? 'highlighted':''" *ngFor="let line of odp; let i= index;" style="border-bottom: solid 1px;border-color:grey;" >
-      <ion-col size="2">
+    <ion-row [ngClass]="renderClass(line,drum)" *ngFor="let line of odp; let i= index;" style="border-bottom: solid 1px;border-color:grey;" >
+      <ion-col size="1">
         {{line.PASSO}}
       </ion-col>
       <ion-col size="3">
@@ -39,9 +43,20 @@
       <ion-col size="2">
         {{line.ACQUA_TEMP}}
       </ion-col>
+      <ion-col size="1">
+          {{line.DURATA}}
+        </ion-col>
+      <!--<ion-progress-bar *ngIf = "isCurrentPass(line,drum)" color="primary" value={{getPercentage(line,drum)}}>
+      </ion-progress-bar>-->
+      <div  *ngIf = "isCurrentPass(line,drum)" id="progressbar">
+          <div [style.width]="getPercentage(line,drum) | percent"></div>{{getPercentage(line,drum)*100}}%
+        </div>
+
     </ion-row>
+  
+
   </ion-grid>
   <ion-fab vertical="center" horizontal="center" slot="fixed">
-      <ion-spinner [style.display]="displaySpinner" name="lines"></ion-spinner>
+      <ion-spinner [style.display]="displaySpinner" name="crescent"></ion-spinner>
     </ion-fab>
 </ion-content>

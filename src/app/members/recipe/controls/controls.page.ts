@@ -25,6 +25,7 @@ export class ControlsPage implements OnInit {
 
   getData(){
 this.controls=this.pushservice.controlsdata;
+
   
   }
   goToControlList(event, control) {

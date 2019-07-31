@@ -10,7 +10,7 @@
 <ion-content color="danger">
 
   <ion-grid color="danger">
-    <ion-row no-padding align-items-center justify-content-cente *ngFor="let alarm of alarms; let i= index"
+    <ion-row no-padding align-items-center justify-content-cente *ngFor="let alarm of alarms; let i= index;trackBy: trackByAlarm;"
       (click)="buttonClick(alarms,i)" color="danger">
       <ion-col no-padding size="12">
         <ion-card background="C40000" class="blink">

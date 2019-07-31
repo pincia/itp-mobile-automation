@@ -3,6 +3,10 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NavController, NavParams } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { Storage } from '@ionic/storage';
+const USER_KEY = 'userdata';
+
+
 
 @Component({
   selector: 'app-profile',
@@ -27,9 +31,15 @@ export class ProfilePage {
   primaryColor='#44bbec';
   secondryColor = '#0163fc';
   user_id: any;
-
+user_data:any;
   public colorCode: any;
-  constructor(router: Router,public navCtrl: NavController, public dataService: DataService,private route: ActivatedRoute) {
+  constructor(private storage: Storage,router: Router,public navCtrl: NavController, public dataService: DataService,private route: ActivatedRoute) {
+    storage.get(USER_KEY).then((val) => {
+      this.user_data=val;
+      console.log("USER DATA ");
+      console.log(val);
+    });
+    
     this.route.paramMap
     .subscribe((queryParams: ParamMap) => {
        var id = queryParams.get('id');
@@ -70,7 +80,7 @@ export class ProfilePage {
     this.profileData = {
       "fullname":"Federico Pinciaroli",
       "designation":"Programmatore Software",
-      "avatar":"assets/imgs/pincia.png",
+      "avatar":"assets/imgs/user.jpg",
       "city":"San Miniato",
       "address":"Via LAndeschi, 7",
       "conuntry":"Italy",

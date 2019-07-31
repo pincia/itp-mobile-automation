@@ -12,17 +12,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content  class="background-content">
 
 
-  <ion-list lines="none">
-     <ion-item *ngFor="let product of products; let i= index; trackBy: trackByProduct;" >
-      <ion-card (click)="goToProduct($event,product)">
+  <ion-list  class="background-content" lines="none">
+     <ion-item class="background-content" *ngFor="let product of products; let i= index; trackBy: trackByProduct;" >
+      <ion-card style="width:100%;" (click)="goToProduct($event,product)">
          <div class="item-content">
           <ion-grid>
             <ion-row align-items-center justify-content-cente>
               <ion-col size="3">
-                <img src='assets/images/flask.svg' width='42' height='42'>
+                <img src='assets/images/ampolla.svg' width='42' height='42'>
               </ion-col>
               <ion-col size="9">
                 {{product.PRODOTTO}}

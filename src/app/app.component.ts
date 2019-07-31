@@ -10,9 +10,7 @@ import { Vibration } from '@ionic-native/vibration/ngx';
 import { Router } from '@angular/router';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
-//import { AnyTxtRecord } from 'dns';
-//import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
-//import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -34,28 +32,33 @@ export class AppComponent {
     private authenticationService: AuthenticationService,
     private router: Router,
     private http:HttpClient,
-   // public endpoint= environment.serverEndpoint,
+
  
     private alertCtrl: AlertController
   ) {
     this.vibration_active=false;
-    this.oneSignal.startInit('f5cf95c2-43d3-4e31-b83d-75a2a5df62d4', '294203629540');
+    console.log("INIT ONESIGNAL")
+   this.oneSignal.startInit('dc411c31-f344-4ddd-a339-9e1e0016fba3', '294203629540');
+    //this.oneSignal.setLogLevel({logLevel: 5, visualLevel: 4});
 
   this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
     
     this.oneSignal.handleNotificationReceived().subscribe((data) => {
+      console.log("NOTIFCATION RECIVED AUTHSTATE: "+this.authenticationService.isAuthenticated());
+      if (this.authenticationService.isAuthenticated()){
      // do something when notification is 
+    
       console.log(data.payload);
      let type = data.payload['additionalData']['type'] ;
      let machine = data.payload['additionalData']['machine'] ;
      let message = data.payload['additionalData']['message'] ;
-    if(type=="ALARM") this.nativeAudio.play('test');
+    if(type=="ALARM") this.nativeAudio.play('alert');
     if(type=="INFO") this.nativeAudio.play('test2');
     
       console.log(data);
      this.presentAlert(type,machine+"\n"+message,);
      this.vibrate();
-      
+      }
     });
    
 
@@ -77,6 +80,7 @@ export class AppComponent {
     this.initializeApp();
   }
    
+
 vibrate(){
   console.log("vibrate");
   this.vibration.vibrate([200,100,200,100,200,100,200,100,]);
@@ -84,7 +88,7 @@ vibrate(){
   initializeApp() {
     this.platform.ready().then(() => {
        
-      this.nativeAudio.preloadSimple('test', 'assets/sounds/woop.mp3');
+      this.nativeAudio.preloadSimple('alert', 'assets/sounds/alert.wav');
       this.nativeAudio.preloadSimple('test2', 'assets/sounds/info.wav');
       
       this.authenticationService.authenticationState.subscribe(state => {
@@ -98,7 +102,6 @@ vibrate(){
       });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      console.log("ENDI INIT");
     });
     
   }

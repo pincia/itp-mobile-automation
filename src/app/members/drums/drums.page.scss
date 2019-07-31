@@ -76,7 +76,16 @@
   99% { color: transparent; }
   100% { color:#ff0000  transparent;  }
 }
-
+.drum{
+  width:100%;
+  height:100%;
+}
+.show{
+  display:block!important;
+}
+.hide{
+  display:none!important;
+}
 
 .blink_alarm  {
   font-size: 46px;
@@ -86,3 +95,19 @@
 animation:         argh-my-eyes_alarm 1s infinite;
 }
 
+.alarm-alert{
+  .alert-wrapper{
+  --background: white;
+  border: solid 3px;
+  border-color: red;
+  border-radius: 18px;  
+  .alert-title  {
+    color: red!important;
+    font-weight: bold;
+  }
+}
+  .alert-message{
+      color: black!important;
+  }
+
+}

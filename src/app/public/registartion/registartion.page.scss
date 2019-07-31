@@ -1,0 +1,37 @@
+page-registration {
+    .text-input {
+      margin: 0px !important;
+    }
+  
+    .log{
+      font-weight: 800;
+      color:#000;
+    }
+    .logo {
+      width: 90px;
+      padding: 30px 0px !important; 
+      margin: 0 auto;
+      display: block;
+    }
+ 
+    .login-logo {
+      margin-top: 0%;
+    }
+    .login{
+      margin: 0px !important;
+    }
+  }
+  
+  .have-account {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  ion-spinner {
+
+    color:rgb(49, 128, 219);
+    }
+ion-icon{
+    width: 50px;
+}

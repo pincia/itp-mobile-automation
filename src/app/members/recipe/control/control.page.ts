@@ -42,7 +42,7 @@ export class ControlPage implements OnInit {
   public odp: any;
   public passo: any
   public showSelection:any;
-  public host = "c7183545.ngrok.io";
+  public host = "5dd8db89.ngrok.io";
   cameraOptions: CameraOptions = {
     quality: 100,
     sourceType: this.camera.PictureSourceType.CAMERA,
@@ -174,8 +174,8 @@ console.log("SHOW: "+this.showSelection);
   }
 
   async uploadImageData(formData: FormData) {
-    const loading = await this.loadingController.create();
-    await loading.present();
+  //  const loading = await this.loadingController.create();
+    //await loading.present();
 
     this.http.post("http://c7183545.ngrok.io/upload/", formData)
       .pipe(
@@ -183,10 +183,10 @@ console.log("SHOW: "+this.showSelection);
       .subscribe(res => {
         if (res['success']) {
           this.presentToast('File upload complete.')
-          loading.dismiss();
+         // loading.dismiss();
         } else {
           this.presentToast('File upload failed.')
-          loading.dismiss();
+          //loading.dismiss();
         }
       });
   }

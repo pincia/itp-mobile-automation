@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title >{{title}}</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col size="2">
+
+    </ion-col>
+    <ion-col size="8"sky>
+        <ion-searchbar  
+        placeholder="ODP"
+        (ionClear)="clear()"
+        (keyup)="updateFilter($event)"></ion-searchbar>
+   
+    </ion-col >
+  <ion-col size="2"> 
+      
+  </ion-col>
+  </ion-row>
+  <ion-row>
+   <ion-col size="12">
+    <div  style="padding:8px;font-size: 12px;"   [style.display]="displayTable">
+      <ngx-datatable
+        #table
+        class="material"
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="6"
+        [rows]="rows"
+        [rowClass]="getRowClass"
+        (activate)="goToODP($event)"
+      >
+      </ngx-datatable>
+   </div>
+  </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+ <ion-fab vertical="center" horizontal="center" slot="fixed">
+  <ion-spinner [style.display]="displaySpinner" name="crescent"></ion-spinner>
+</ion-fab>
+</ion-content>

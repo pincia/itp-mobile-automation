@@ -14,5 +14,14 @@
 
 ion-spinner {
 
-    transform: scale(3);
+    color:rgb(49, 128, 219);
     }
+ion-icon{
+    width: 50px;
+}
+
+.forgotPassword {
+    a{
+        color:rgba(var(--ion-text-color-rgb,0,0,0),0.54)!important;
+    }
+}

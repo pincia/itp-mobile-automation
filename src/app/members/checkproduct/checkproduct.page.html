@@ -1,17 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>CHECK PRODUCT</ion-title>
+    <ion-title style="color:red;">CHECK PRODUCT</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-grid padding>
+<ion-content no-padding>
+    <ion-grid padding style="padding-top:0;">
+      <div style="text-align: center;
+      font-weight: bold;">
+        <p>{{message}}</p>
+      </div>
       <ion-row  no-padding style="TEXT-ALIGN: center;border: 2px solid;">
         <ion-col><b>DRUM</b> <br>{{drum}}</ion-col>
         <ion-col><b>ODP</b> <br>{{odp}}</ion-col>
         <ion-col><b>STEP</b> <br>{{step}}</ion-col>
       </ion-row>
-        <ion-row [style.display]="displayDrum" class="custom-row" padding>
+        <ion-row [style.display]="displayDrum"  class="custom-row" padding>
           <ion-col class="title">DRUM OK</ion-col>
 <!--<ion-col>{{drum}}</ion-col>-->
         </ion-row>

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>CONSUMI ODP {{odp}}</ion-title>
+
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+    <ion-content>
+      
+        <ion-card style="text-align: center;">
+            <ion-card-header >
+                Acqua
+            </ion-card-header>
+            <ion-card-content >
+              <canvas #barCanvas></canvas>
+              <p style="font-size: 8px">STEP</p>
+              <h6 style="text-align: right; margin-top: 25px;">Totale Consumo {{ totale_acqua}} lt.</h6>
+            </ion-card-content>
+          </ion-card>
+          <ion-card style="text-align: center;" no-padding>
+              <ion-card-header >
+                  Prodotti Chimici Automatici
+              </ion-card-header>
+              <ion-card-content no-padding>
+                  <canvas #barCanvas_></canvas>
+                  <p style="font-size: 8px;MARGIN-BOTTOM: 20px;">KG</p>
+              </ion-card-content>
+            </ion-card>
+          <ion-card no-padding>
+              <ion-card-header style="text-align: center;">
+                  Prodotti Chimici Manuali
+              </ion-card-header>
+              <ion-card-content no-padding>
+                  <canvas #doughnutCanvas_ style="MARGIN-BOTTOM: 20px;"></canvas>
+               
+              </ion-card-content>
+            </ion-card>
+   
+    
+      </ion-content>

@@ -910,7 +910,7 @@ text-align: center;
 .title-md {
 left: 0;
 top: 0;
-padding: 0 90px 1px;
+padding: 0 60px 1px;
 position: absolute;
 width: 100%;
 height: 100%;
@@ -1109,8 +1109,8 @@ margin: 0px !important;
 }
 
 .logo {
-width: 150px;
-padding: 30px 0px !important; 
+width: 80vw;
+padding: 0.5em 0em !important; 
 margin: 0 auto;
 display: block;
 }
@@ -1160,11 +1160,22 @@ border-radius: 5px;
   margin-bottom: 20px;
 }
 .forgotPassword {
+  display: inline-block;
 text-align: right;
-font-size: 14px;
+font-size: 12px;
 font-weight: 600;
 margin-bottom: 5%;
+width:50%;
 }
+.registerUser {
+  display: inline-block;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 5%;
+  width:50%;
+  }
+
 .item-inner {
 border: none !important;
 padding: 0px !important;
@@ -1414,7 +1425,7 @@ ion-segment{
 .profile-inner-item{
     color: #8e8e93;
     float: right;
-    font-size: 16px;
+    font-size: 20px;
 }
 .profile-title{
     display: inline-block !important;
@@ -1928,6 +1939,78 @@ margin: 0px 6px;
 margin-top: 10px;
 }
 
+.calendar-alert{
+  .alert-wrapper{
+  --background: white;
+  border: solid 3px;
+  border-color: rgb(49, 128, 219);
+  border-radius: 18px;  
+  .alert-title  {
+    color: rgb(49, 128, 219);
+    font-size: x-large;
+    text-align: center;
+  }
+}
+  .alert-message{
+      color: black!important;
+  }
+  .alert-button{
+    color: white!important;
+    background: rgb(49, 128, 219);
+    font-weight: bold;
+  }
+}
+.alarm-alert{
+  .alert-wrapper{
+  --background: white;
+  border: solid 3px;
+  border-color: red;
+  border-radius: 18px;  
+  text-align: center;
+  .alert-title  {
+    color: red;
+    font-size: x-large;
+    text-align: center;
+  }
+}
+  .alert-message{
+      color: black!important;
+  }
+  .alert-button{
+    color: white!important;
+    background: red;
+    font-weight: bold;
+  }
+}
+
+.logout-alert{
+  .alert-wrapper{
+  --background: white;
+  //border: solid 1px;
+  //border-color: red;
+  border-radius: 18px;  
+  .alert-title  {
+    color: red;
+    font-size: x-large;
+  }
+
+.alert-button-group {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+  .alert-message{
+      text-align: center!important;
+      color: black!important;
+  }
+  .alert-button{
+    color: rgb(49, 128, 219);
+    //color: white!important;
+  //  background:rgb(49, 128, 219);
+    font-weight: bold;
+  }
+}
+}
 .alarm{
   .alert-wrapper{
   --background: white;
@@ -1941,6 +2024,12 @@ margin-top: 10px;
 }
   .alert-message{
       color: black!important;
+  }
+  .alert-button{
+    background: red!important;
+    color: white!important;
+  //  background:rgb(49, 128, 219);
+    font-weight: bold;
   }
 
 }

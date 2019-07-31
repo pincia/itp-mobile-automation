@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title >FEEDBACKS</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>  
+<ion-content>
+    <ion-list class="inputLabel">
+      <ion-item class="inputItem item-leave-height">
+        <ion-label class="addInput-Label" stacked>Feedback Vocali</ion-label>
+        <ion-toggle [(ngModel)]="feed_vocal" (click)="setPropriety('feed_vocal');"></ion-toggle>
+      </ion-item>
+      <ion-item class="inputItem item-leave-height">
+          <ion-label class="addInput-Label" stacked>Vibrazione</ion-label>
+          <ion-toggle [(ngModel)]="feed_vibe" (click)="setPropriety('feed_vibe');" ></ion-toggle>
+        </ion-item>
+        <ion-item class="inputItem item-leave-height">
+            <ion-label class="addInput-Label" stacked>Suoni</ion-label>
+            <ion-toggle  [(ngModel)]="feed_sound" (click)="setPropriety('feed_sound');" ></ion-toggle>
+          </ion-item>
+      <ion-item class="inputItem item-leave-height">
+        <ion-label class="addInput-Label" stacked>Feedback Aptico</ion-label>
+        <ion-toggle  [(ngModel)]="feed_hapt" (click)="setPropriety('feed_hapt');"></ion-toggle>
+      </ion-item>
+    </ion-list>
+</ion-content>

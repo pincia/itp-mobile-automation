@@ -4,11 +4,9 @@
           <ion-back-button  class="notificationIcon"></ion-back-button>
         </ion-buttons>
     <ion-title>Profilo
-      <!-- <img src="assets/imgs/new-hrms.png" class="whiteLogo"> -->
+  
     </ion-title>
-    <div class="notification-div">
-        <ion-icon  ios="ios-create-outline" md="md-create" (click)="editProfile()" class="notificationIcon"></ion-icon>
-      </div>
+
   </ion-toolbar>
 </ion-header>
   
@@ -20,48 +18,34 @@
             <img *ngIf="profileImage" src="{{profileImage}}" class="profile-pic" (error)="console.log(error); setDefaultPic()">
           </div>
           <div class="profile-header-field">
-            <h2 class="profile-name">{{profileData.fullname}}</h2>
-            <h2 class="profile-designation">{{profileData.designation}}</h2>
+            <h2 class="profile-name">{{user_data.nome}} {{user_data.cognome}}</h2>
+            <h2 class="profile-designation">{{user_data.mansione}}</h2>
           </div>
         </ion-card>
       </div>
-  
-      <div>
-        <ion-segment [(ngModel)]="profile">
-          <ion-segment-button class="profile-segment" value="overview">
-            Overview
-          </ion-segment-button>
-          <ion-segment-button class="profile-segment" value="education">
-            Education
-          </ion-segment-button>
-          <ion-segment-button class="profile-segment" value="experience">
-            Experience
-          </ion-segment-button>
-        </ion-segment>
-      </div>
+
     </div>
     <div id="scroll1">
-      <div [ngSwitch]="profile">
-        <div class="segment-tab" *ngSwitchCase="'overview'">
+    
           <ion-list class="profile-list">
             <ion-item class="profile-item" style="border-bottom: 1px solid #e7e7e7 !important;">
               <div class="holiday-card">
-                <h4 class="profile-title">Employee ID</h4>
-                <span class="profile-inner-item">{{profileData.user_id}}</span>
+                <h4 class="profile-title">ID Utente</h4>
+                <span class="profile-inner-item">{{user_data.id}}</span>
               </div>
             </ion-item>
             <ion-item class="profile-item" style="border-bottom: 1px solid #e7e7e7 !important;">
               <div class="holiday-card">
-                <h4 class="profile-title">Phone</h4>
-                <span class="profile-inner-item">{{profileData.phone}}</span>
+                <h4 class="profile-title">Ruolo</h4>
+                <span class="profile-inner-item">{{user_data.role}}</span>
               </div>
             </ion-item>
             <ion-item class="profile-item" style="border-bottom: 1px solid #e7e7e7 !important;">
               <div class="holiday-card">
                 <h4 class="profile-title">Email</h4>
-                <span class="profile-inner-item">{{profileData.email}}</span>
+                <span class="profile-inner-item">{{user_data.email}}</span>
               </div>
-            </ion-item>
+            </ion-item><!--
             <ion-item class="profile-item" style="border-bottom: 1px solid #e7e7e7 !important;">
               <div class="holiday-card">
                 <h4 class="profile-title">Birthday</h4>
@@ -73,73 +57,17 @@
                 <h4 class="profile-title">Gender</h4>
                 <span class="profile-inner-item">{{profileData.gender}}</span>
               </div>
-            </ion-item>
+            </ion-item>-->
           </ion-list>
           <ion-list class="profile-list">
             <ion-item class="profile-item">
               <div class="holiday-card">
-                <h4 class="holiday-title">Address</h4>
-                <p class="profile-address"><span *ngIf="profileData.address !=''">{{profileData.address}},</span> <span
-                    *ngIf="profileData.city !=''">{{profileData.city}},</span><span *ngIf="profileData.country !=''">{{profileData.country}}.</span></p>
+                <h4 class="holiday-title">Indirizzo</h4>
+                <p class="profile-address"><span *ngIf="profileData.address !=''">{{user_data.address}}</span></p>
               </div>
             </ion-item>
           </ion-list>
-          <!-- <div class="profile-skills">
-          <p>Skills</p>
-          <div class="skills">
-            <span class="">IOS</span>
-            <span>Android</span>
-            <span>Html</span>
-            <span>CSS</span>
-            <span>Codignitor</span>
-            <span>Php</span>
-            <span>Javascript</span>
-            <span>Wordpress</span>
-            <span>Jquery</span>
-          </div>
-        </div> -->
-        </div>
-  
-        <div *ngSwitchCase="'education'">
-          <div *ngIf="!noEducation">
-            <div class="profile-list" *ngFor="let edu of educationDetails">
-              <div class="profile-education">
-                <div class="experience-content">
-                  <div class="timeline-content">
-                    <span class="name"> {{edu.institution}}</span>
-                    <div>{{edu.degree}} {{edu.subject}}</div>
-                    <span class="time">{{edu.start_year}} - {{edu.complete_year}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="noEducation" class="dashboard-area">
-            <h3 class="nolist">No details found</h3>
-          </div>
-        </div>
-  
-        <div *ngSwitchCase="'experience'">
-          <div *ngIf="!noExperience">
-            <div class="profile-list" *ngFor="let exp of exprienceInfo">
-              <div class="profile-education">
-                <!-- <div class="experience-user">
-              <div class="before-circle"></div>
-            </div> -->
-                <div class="experience-content">
-                  <div class="timeline-content">
-                    <span class="name">Web Designer at Zen Corporation</span>
-                    <span class="time1">Jan 2013 - Present (5 years 2 months)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="noExperience" class="dashboard-area">
-            <h3 class="nolist">No details found</h3>
-          </div>
-        </div>
-      </div>
+    
     </div>
   </ion-content>
 

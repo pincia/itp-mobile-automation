@@ -160,5 +160,8 @@ async presentAlert(message) {
 
   await alert.present();
 }
+getColor(tank){
+  return "rgb("+tank.LIQUID_COLOR+")";
 
+}
 }
