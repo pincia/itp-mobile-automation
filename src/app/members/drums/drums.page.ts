@@ -51,6 +51,46 @@ ionViewWillLeave(){
   }
   clearInterval(this.data_interval);
 }
+
+ionViewWillEnter(){
+  for(let i=0;i<this.countProperties(this.pushservice.drumsdata);i++){
+    this.current_frame[i]=0;
+  }
+  for (var i = 0 ; i<this.drums_animations.length ; i++){
+    let rpm = parseFloat(this.pushservice.drumsdata[i]['RPM'])
+   // rpm = Math.random()*(9 - 3) + 3;
+    let direzione = +this.pushservice.drumsdata[i]['DIREZIONE']
+  //direzione = Math.trunc(Math.random()*3)
+    let frames_per_minute = rpm*52
+    let interval_time=0
+    if (frames_per_minute == 0) interval_time =20000000
+    else interval_time = (1/(frames_per_minute/60))*1000
+   // console.log("RPM: "+rpm+ " DIRECTION: "+direzione+" INTERVAL TIME: "+interval_time)
+    this.drums_animations[i] = new Timer(interval_time,i,this,direzione)
+    
+  }
+  console.log(this.drums_animations)
+  this.getData();
+  this.data_interval = setInterval(()=>{ 
+
+  this.getData();
+  }, 10000);
+  }
+
+  setFrame(i){
+    //console.log("SET FRAME "+i)
+    let dir = this.drums_animations[i].direzione
+    if (dir==1){
+      this.current_frame[i]+=1
+      if (this.current_frame[i]>51) this.current_frame[i]=0
+      
+    }
+    if (dir==0){
+      this.current_frame[i]-=1
+      if (this.current_frame[i]<0) this.current_frame[i]=51
+    }
+
+}
 getData(){
   if(this.drumdata){
     for (var i=0; i<this.drumdata.length; i++){
@@ -143,44 +183,7 @@ trackByDrum(index,drum) {
   return drum.ID; 
 }
 ngOnInit() {
-  for(let i=0;i<this.countProperties(this.pushservice.drumsdata);i++){
-    this.current_frame[i]=0;
-  }
 
-  
-  for (var i = 0 ; i<this.drums_animations.length ; i++){
-    let rpm = parseFloat(this.pushservice.drumsdata[i]['RPM'])
-   // rpm = Math.random()*(9 - 3) + 3;
-    let direzione = +this.pushservice.drumsdata[i]['DIREZIONE']
-  //direzione = Math.trunc(Math.random()*3)
-    let frames_per_minute = rpm*52
-    let interval_time=0
-    if (frames_per_minute == 0) interval_time =20000000
-    else interval_time = (1/(frames_per_minute/60))*1000
-   // console.log("RPM: "+rpm+ " DIRECTION: "+direzione+" INTERVAL TIME: "+interval_time)
-    this.drums_animations[i] = new Timer(interval_time,i,this,direzione)
-    
-  }
-  console.log(this.drums_animations)
-  this.getData();
-  this.data_interval = setInterval(()=>{ 
-
-  this.getData();
-  }, 10000);
-  }
-
-  setFrame(i){
-    //console.log("SET FRAME "+i)
-    let dir = this.drums_animations[i].direzione
-    if (dir==1){
-      this.current_frame[i]+=1
-      if (this.current_frame[i]>51) this.current_frame[i]=0
-      
-    }
-    if (dir==0){
-      this.current_frame[i]-=1
-      if (this.current_frame[i]<0) this.current_frame[i]=51
-    }
   }
 
 }

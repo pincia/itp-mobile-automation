@@ -111,9 +111,6 @@ goToODP(event) {
 }
 ngOnInit() {
   
-
-
-
 }
 
   fetch(cb) {

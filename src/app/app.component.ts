@@ -54,7 +54,6 @@ export class AppComponent {
      let message = data.payload['additionalData']['message'] ;
     if(type=="ALARM") this.nativeAudio.play('alert');
     if(type=="INFO") this.nativeAudio.play('test2');
-    
       console.log(data);
      this.presentAlert(type,machine+"\n"+message,);
      this.vibrate();
@@ -64,10 +63,7 @@ export class AppComponent {
 
 
     this.oneSignal.handleNotificationOpened().subscribe((data) => {
-      /*
-      let type = data.payload['additionalData']['type'] ;
-      let machine = data.payload['additionalData']['machine'] ;
-      let message = data.payload['additionalData']['message'] ;*/
+     
       // do something when a notification is opened
       console.log("HANDLED OPEN PUSHHHHH");
 //console.log(data.payload);

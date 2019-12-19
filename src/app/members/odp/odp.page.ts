@@ -87,7 +87,7 @@ export class OdpPage implements OnInit {
     let durata_corrente = +drum['DURATA_CICLO']
     if(!durata_stimata || !durata_corrente) return 1
     durata_stimata = durata_stimata*60
-    return (durata_corrente/durata_stimata)
+    return (durata_corrente/durata_stimata).toFixed(3)
   }
   isCurrentPass(line,drum){
    

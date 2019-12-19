@@ -1,6 +1,6 @@
 import { Component,ViewChild, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-import { ChartsModule } from 'ng2-charts';
+
 import { HttpClient } from '@angular/common/http';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';

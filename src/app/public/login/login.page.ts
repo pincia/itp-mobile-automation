@@ -84,9 +84,6 @@ export class LoginPage implements OnInit {
     
   }
 
-
-
-  
   logincode(code: string) {
     this.displaySpinner="block";
     let param = code.split("_")
@@ -110,23 +107,7 @@ export class LoginPage implements OnInit {
   
 
   onChange(value){
-    this.codice_impianto=value;
-    try{
-    window["plugins"].OneSignal.deleteTag("codice");
-    window["plugins"].OneSignal.sendTag("codice",value);
-    }
-    catch(error){
-console.log("NO ONESIGNAL")
-    }
-    this.storage.set("codice_impianto",value)
-    this.impianti.forEach(impianto=>{
-      if(impianto.codice_impianto==this.codice_impianto){
-        this.storage.set("api_host",impianto.api_host);
-        this.storage.set("socket_host",impianto.socket_host);
-        this.storage.set("codice_registrazione",impianto.codice_registrazione);
-        this.authService.host=impianto.api_host;
-        }
-    })
+    
   }
 
   async presentToast(message) {

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
 import { FormsModule,ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -82,7 +81,6 @@ const echoConfig: SocketIoEchoConfig = {
     FilePath,
     NativeAudio,
     NativePageTransitions,
-  
     SpeechRecognition,
     PushService,
     OneSignal,
